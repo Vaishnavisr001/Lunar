@@ -3,25 +3,27 @@
 using namespace std;
 int main()
 {
-	int num, remainder, res{}, actual_no;
+	int actual_no, sum = 0, temp, digit, count = 0;
 	cout << "Enter the number";
-	cin >> num;
-	actual_no = num;
-	while (num != 0) {
-		remainder = num % 10;
-		res = res + pow(remainder, 3);
-		num = num / 10;
-
-
-	}
-	if (res == actual_no)
+	cin >> actual_no;
+	temp = actual_no;
+	while (temp != 0)
 	{
-		cout << actual_no << "is an Amstrong Number" << endl;
+		count++;
+		temp = temp / 10;
+	}
+	temp = actual_no;
+	while(temp!=0)
+	{
+		digit = temp % 10;
+		sum = sum + (digit * count);
+		temp = temp / 10;
+		
 
 	}
-	else {
-		cout << actual_no << "is not an Amstrong number" << endl;
-
-	}
+	if (sum == actual_no)
+		cout << actual_no << "Armstrong number" << endl;
+	else
+		cout << actual_no << "Armstrong number" << endl;
 	return 0;
 }
