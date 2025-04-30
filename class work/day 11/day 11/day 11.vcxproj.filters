@@ -24,5 +24,11 @@
     <ClCompile Include="array question.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="problem statement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primenumber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
