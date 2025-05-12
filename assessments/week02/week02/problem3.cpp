@@ -1,9 +1,9 @@
 //Check for Armstrong number
 #include<iostream>
 using namespace std;
-int main()
+bool amstrong(int actual_no)
 {
-	int actual_no, sum = 0, temp, digit, count = 0;
+	int  sum = 0, temp, digit, count = 0;
 	cout << "Enter the number";
 	cin >> actual_no;
 	temp = actual_no;
@@ -13,17 +13,36 @@ int main()
 		temp = temp / 10;
 	}
 	temp = actual_no;
-	while(temp!=0)
+	while (temp != 0)
 	{
 		digit = temp % 10;
 		sum = sum + (digit * count);
 		temp = temp / 10;
-		
+
 
 	}
-	if (sum == actual_no)
-		cout << actual_no << "Armstrong number" << endl;
-	else
-		cout << actual_no << "Armstrong number" << endl;
-	return 0;
+	return sum == actual_no;
+}
+int main()
+{
+	int limit;
+	cout << "enter the amstrong number";
+	cin >> limit;
+	if (limit > 1)
+	{
+		cout << "Enter the limit";
+		return 1;
+	}
+	else {
+		cout << "enter the amstrong number from " << limit << "to:" << endl;
+
+	}
+	for (int i = 0;i <= limit;++i) {
+		if (amstrong(i)) {
+			cout << i << " ";
+		}
+		cout << endl;
+		return 0;
+	}
+	
 }
