@@ -15,22 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="second smallest number.cpp">
+    <ClCompile Include="queue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="remove duplicates element.cpp">
+    <ClCompile Include="linkedlist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pattern.cpp">
+    <ClCompile Include="linkelist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="suare battern.cpp">
+    <ClCompile Include="function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reverse string.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reverse line.cpp">
+    <ClCompile Include="class linkedlist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -15,20 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1st.cpp">
+    <ClCompile Include="day29.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="prg2.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="datastructure.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="clss stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Employee.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="linkedlist.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -15,19 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1st.cpp">
+    <ClInclude Include="linkedlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="prg2.cpp">
+    <ClCompile Include="linklist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="datastructure.cpp">
+    <ClCompile Include="Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clss stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Employee.cpp">
+    <ClCompile Include="employee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
