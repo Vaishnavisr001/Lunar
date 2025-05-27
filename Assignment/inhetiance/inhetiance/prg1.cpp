@@ -4,7 +4,7 @@ using namespace std;
 //base class
 class YoutubeChannel {
 private:
-	
+
 	string Name;
 	int SubscribersCount;
 	string PublishedVideoTitles[MAX];
@@ -24,7 +24,7 @@ public:
 		cout << "OwnerName:" << OwnerName << endl;
 		cout << "SubscriberCount:" << SubscribersCount << endl;
 		cout << "Videos:" << endl;
-		for (int i=0;i< videocount;i++){
+		for (int i = 0;i < videocount;i++) {
 			cout << PublishedVideoTitles[i] << endl;
 
 
@@ -40,12 +40,12 @@ public:
 
 	void publishVideo(string title)
 	{
-		if(videocount<100){
-		PublishedVideoTitles[videocount] = title;
-		videocount++;
-	}
-	else {
-		cout << "video limit reach!" << endl;
+		if (videocount < 100) {
+			PublishedVideoTitles[videocount] = title;
+			videocount++;
+		}
+		else {
+			cout << "video limit reach!" << endl;
 		}
 
 	}
@@ -57,7 +57,7 @@ public:
 
 	}
 	void pratice() {
-		cout <<OwnerName<< " is Cooking,learning new recipes,experimenting with spices..."<<endl;
+		cout << OwnerName << " is Cooking,learning new recipes,experimenting with spices..." << endl;
 	}
 };
 
@@ -76,7 +76,7 @@ int main() {
 	//y2.pratice();
 	//YoutubeChannel ytchannel("coding", "haris");//object for base class
 	//ytchannel.pratice(); here it is not possible to access the derived class properties using base class object
-	
+
 
 	return 0;
 }
