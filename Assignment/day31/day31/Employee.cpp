@@ -1,77 +1,75 @@
 #include<iostream>
 using namespace std;
-class Employee {
+
+class Employee
+{
 protected:
-	int empId;
+	int eid;
 	string name;
 public:
-	Employee(int id, string n) {
-		empId = id;
-		name = n;
-
-	}
-	int getEmpId() {
-		return empId;
-
-	}
-	string getNmae() {
-		return name;
-
-	}
-	void setEmpId(int id) {
-		empId = id;
-	}
-	void setName(string n) {
+	Employee(int e, string n)
+	{
+		eid = e;
 		name = n;
 	}
-	void display() {
-		cout << "TechLead Info" << endl;
-		cout << "EMPID:" << empId << endl;
-		cout << "Name:" << name << endl;
 
-
-	}
 };
-class Developer :public Employee {
+
+class Developer :public Employee
+{
 protected:
-	int codingHours;
+	float codinghours;
 public:
-	Developer(int id, string n, int hours) :Employee(id, n) {
-		codingHours = hours;
-
-	}
-	int getCodingHours() {
-		return codingHours;
-
-	}
-	void setCodingHours(int hours) {
-		codingHours = hours;
+	Developer(int eid, string name, float hours) :Employee(eid, name)
+	{
+		codinghours = hours;
 	}
 };
-class Manager :public Employee {
+
+
+class Manager :public Employee
+{
 protected:
-	int teamSize;
+	int teamsize;
 public:
-	Manager(int id,string n,int size):Employee(id,n),teamSize(size){}
-	int getTeamSize() {
-		return teamSize;
+	Manager(int eid, string name, int Size) :Employee(eid, name)
+	{
+		teamsize = Size;
 	}
-	void setTeamSize(int size) {
-		teamSize = size;
 
+
+	void disp()
+	{
+		cout << "EmpId: " << eid << endl;
+		cout << "Name: " << name << endl;
 	}
-};
-class TechLead :public Developer, public Manager {
-public:
-	TechLead(int id, string n, int hours, int size) :Employee(id, n), Developer(id, n, hours), Manager(id, n, size) {}
-	int calculateSalary() {
-		return getCodingHours() * 500;
-	}
+
 };
 
-int main() {
-	int empId, codingHours, teamSize;
-	string name;
-	cout << "EMPID:";
-	cin>>empI
+
+class TechLead :public Developer, public Manager
+{
+private:
+	float sal;
+public:
+	TechLead(int eid, string name, float codinghours, int teamsize, float sal) :Developer(eid, name, codinghours), Manager(eid, name, teamsize)
+	{
+		this->sal = sal;
+	}
+	void calculateSal()
+	{
+		float codingHoursSal = sal * codinghours;
+		cout << "Salary based on coding " << codingHoursSal << endl;
+		float teamSizeSal = (5000 * teamsize) + codingHoursSal;
+		cout << "Salary based on coding and team " << teamSizeSal;
+	}
+};
+
+
+
+int main()
+{
+	TechLead T(101, "Vaishnavi", 12, 10, 500);
+	T.disp();
+	T.calculateSal();
 }
