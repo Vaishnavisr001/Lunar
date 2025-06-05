@@ -17,7 +17,7 @@ int main()
 		if (banned.find(word) == banned.end()) {
 			result = result + word + " ";
 		}
-		if (end == string:npos)break;
+		if (end == string::npos)break;
 		start = end + 1;
 	}
 	if (!result.empty()) {

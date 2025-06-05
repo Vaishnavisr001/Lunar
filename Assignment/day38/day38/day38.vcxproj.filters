@@ -36,5 +36,14 @@
     <ClCompile Include="batchword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scoreTracker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wordoccurence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deletedmessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
