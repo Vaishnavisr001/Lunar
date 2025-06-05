@@ -127,7 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="schedule.cpp" />
+    <ClCompile Include="batchword.cpp" />
+    <ClCompile Include="scheduleconflict.cpp" />
     <ClCompile Include="stock.cpp" />
     <ClCompile Include="Task.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

@@ -30,7 +30,10 @@
     <ClCompile Include="Unique .cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="schedule.cpp">
+    <ClCompile Include="scheduleconflict.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="batchword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
