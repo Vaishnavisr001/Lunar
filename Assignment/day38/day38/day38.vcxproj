@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="batchword.cpp" />
     <ClCompile Include="deletedmessage.cpp" />
+    <ClCompile Include="price.cpp" />
     <ClCompile Include="scheduleconflict.cpp" />
     <ClCompile Include="scoreTracker.cpp" />
     <ClCompile Include="stock.cpp" />
