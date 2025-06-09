@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include<map>
+
 #include<string>
 #include<unordered_map>
 #include<set>
@@ -75,6 +75,7 @@ public:
 			return registers[operand];
 		}
 		else {
+			cout << operand;
 			return stoi(operand);
 		}
 		
@@ -98,13 +99,15 @@ public:
 		logger::log(logger::Level::INFO, "execution started");
 		while (programCounter < instructions.size()) {
 			string line = instructions[programCounter++];
-			istringstream ss(line);
 			string command, opd1, opd2;
-			ss >> command >> opd1;
-			if (!opd1.empty() && opd1.back() == ',') {
-				opd1.pop_back();
-			}
-			ss >> opd2;
+			auto start = 0;
+			auto end = line.find(' ');
+			command = line.substr(start, end - start);
+			start = end + 1;
+			end = line.find(',');
+			opd1 = line.substr(start, end - start);
+			start = end + 1;
+			opd2 = line.substr(start);
 
 			if (command == "MOV") {
 				setOperandValue(opd1, getOperandValue(opd2));
@@ -144,7 +147,6 @@ public:
 				logger::log(logger::Level::ERROR, "NOT IDENTIFIED INSTRUCTION" + command);
 
 			}
-			PrintCpuState();
 
 		}
 	};
@@ -159,20 +161,21 @@ public:
 			cout << "First 16 Memory Contents" << endl;
 				for (int i = 0;i < 16;i++) {
 					cout << setfill('0') << setw(2) << i << "->";
-					if (i == 3 || i == 5 || i == 7 || i == 9 || i == 11 || i == 13) {
-						cout << memory[i] << endl;
-					}
-					else {
-						cout << "Any trash value" << endl;
-					}
+					cout << memory[i] << endl;
 				}
 
+		}
+		void disp()
+		{
+			for (auto i : instructions)
+				cout << i << endl;
 		}
 	};
 	
 	int main() {
 		MicroProcessor MP;
 		MP.loadInstructions("instructions.txt");
+		//MP.disp();
 		MP.runLoadedInstruction();
 		MP.PrintCpuState();
 		return 0;
