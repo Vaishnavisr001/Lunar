@@ -164,7 +164,7 @@ public:
 		return MMCMNC;
 
 	}
-	string getcallType() {
+	string getcallType()  {
 		return callType;
 	}
 	int getDuration() {
@@ -183,7 +183,7 @@ public:
 	string getthirdPartyMMCMNC() {
 		return thidPartyMMCMNC;
 	}
-	CDR(string& line) {
+	CDR(const string& line) {
 		stringstream ss(line);
 		string temp;
 		getline(ss, temp, '|');
@@ -219,50 +219,8 @@ private:
 	int mbDownloaded;
 	int mbuploaded;
 public:
-	CustomerBill(int incomingVoice = 0, int outgoingVoice = 0, int incomingSMS = 0, int outgoingSMS = 0, int mbDownloaded = 0, int mbuploaded = 0) :
-		incomingVoice(incomingVoice), outgoingVoice(outgoingVoice), incomingSMS(incomingSMS), outgoingSMS(outgoingSMS), mbDownloaded(mbDownloaded), mbuploaded(mbuploaded) {}
-	int setIncomingVoice(int value) {
-		incomingVoice = value;
-	}
-	int setOutgoingVoice(int value) {
-		outgoingVoice = value;
-	}
-	int setIncomingSMS(int value) {
-		incomingSMS = value;
-
-	}
-	int setOutgoingSMS(int value) {
-		outgoingSMS = value;
-	}
-	int setmbDownloaded(int value) {
-		mbDownloaded = value;
-	}
-	int setmbUploaded(int value) {
-		mbuploaded = value;
-	}
-	int getIncomingVoice() {
-		return incomingVoice;
-	}
-	int getOutgoingVoice() {
-		return outgoingVoice;
-	}
-	int getIncomingSMS() {
-		return incomingSMS;
-
-	}
-	int getOutgoingSMS() {
-		return outgoingSMS;
-	}
-	int getmbDownloaded() {
-		return 	mbDownloaded;
-	}
-	int setmbUploaded() {
-		return mbuploaded;
-	}
-	int TotalDataUsed() {
-		return mbDownloaded + mbuploaded;
-	}
-
+	CustomerBill() : incomingVoice(0), outgoingVoice(0), incomingSMS(0), outgoingSMS(0), mbDownloaded(0), mbuploaded(0) {}
+		
 	void ProcessCDR(const CDR &c) {
 		if (c.getcallType() == "MOC") {
 			outgoingVoice++;
