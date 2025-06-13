@@ -40,7 +40,7 @@ public:
 		}
 	
 
-		void log(logLevel level, string & message) {
+		void log(logLevel level, string & message){
 			string Levelstr = levelToString(level);
 			string LogMessage = levelstr + ":" + message;
 			cout << LogMessage << endl;
@@ -219,8 +219,8 @@ private:
 	int mbDownloaded;
 	int mbuploaded;
 public:
-	CustomerBill(int incomingVoice=0,int outgoingVoice=0,int incomingSMS=0,int outgoingSMS=0,int mbDownloaded=0,int mbuploaded=0):
-		incomingVoice(incomingVoice),outgoingVoice(outgoingVoice),incomingSMS(incomingSMS),outgoingSMS(outgoingSMS),mbDownloaded(mbDownloaded),mbuploaded(mbuploaded){}
+	CustomerBill(int incomingVoice = 0, int outgoingVoice = 0, int incomingSMS = 0, int outgoingSMS = 0, int mbDownloaded = 0, int mbuploaded = 0) :
+		incomingVoice(incomingVoice), outgoingVoice(outgoingVoice), incomingSMS(incomingSMS), outgoingSMS(outgoingSMS), mbDownloaded(mbDownloaded), mbuploaded(mbuploaded) {}
 	int setIncomingVoice(int value) {
 		incomingVoice = value;
 	}
@@ -241,7 +241,7 @@ public:
 		mbuploaded = value;
 	}
 	int getIncomingVoice() {
-		return incomingVoice ;
+		return incomingVoice;
 	}
 	int getOutgoingVoice() {
 		return outgoingVoice;
@@ -251,10 +251,10 @@ public:
 
 	}
 	int getOutgoingSMS() {
-		return outgoingSMS ;
+		return outgoingSMS;
 	}
 	int getmbDownloaded() {
-	   return 	mbDownloaded ;
+		return 	mbDownloaded;
 	}
 	int setmbUploaded() {
 		return mbuploaded;
@@ -263,7 +263,47 @@ public:
 		return mbDownloaded + mbuploaded;
 	}
 
+	void ProcessCDR(const CDR &c) {
+		if (c.getcallType() == "MOC") {
+			outgoingVoice++;
+		}else if(c.getcallType()=="MTC"){
+			incomingVoice++;
+		}
+		else if (c.getcallType() == "SMS-MO") {
+			outgoingSMS++;
+		}
+		else if (c.getcallType() == "SMS-MT") {
+			incomingSMS++;
+		}
+		else if (c.getcallType() == "GPRS") {
+			mbDownloaded = mbDownloaded + c.getDownload();
+			mbuploaded = mbuploaded + c.getUpload();
+		}
+	}
+	void PrintBill() {
+		cout << "Customer Billing" << endl;
+		cout << "Incoming Calls" << incomingVoice << endl;
+		cout << "outgoing calls" << outgoingVoice << endl;
+		cout << "incoming msgs" << incomingSMS << endl;
+		cout << "outgoing sms" << outgoingSMS << endl;
+		cout << "Downloaded data(mb)" << mbDownloaded << endl;
+		cout << "Uploaded data(mb)" << mbuploaded << endl;
 
+
+	}
+	void saveFile(const string& filename) {
+		ofstream outFile(filename, ios::app);
+		if (outFile.is_open()) {
+			outFile << "Customer Billing" << endl;
+			outFile << "Incoming Calls" << incomingVoice << endl;
+			outFile<< "outgoing calls" << outgoingVoice << endl;
+			outFile << "incoming msgs" << incomingSMS << endl;
+			outFile << "outgoing sms" << outgoingSMS << endl;
+			outFile << "Downloaded data(mb)" << mbDownloaded << endl;
+			outFile<< "Uploaded data(mb)" << mbuploaded << endl;
+
+		}
+	}
 
 };
 class InterOperatorBilling {
