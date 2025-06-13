@@ -34,18 +34,18 @@ public:
 	}
 	~logger() {
 		if (logFile.is_open()) {
-			if (logFile.is_close()) {
+			logFile.close();
 
-			}
 		}
+	}
 	
 
-		void log(logLevel level, string & message){
-			string Levelstr = levelToString(level);
-			string LogMessage = levelstr + ":" + message;
+		void log(logLevel level, const string & message){
+			string Levelstr = LevelToString(level);
+			string LogMessage = Levelstr + ":" + message;
 			cout << LogMessage << endl;
 			if (logFile.is_open()) {
-				logFile << logMessage << endl;
+				logFile << LogMessage << endl;
 
 			}
 
