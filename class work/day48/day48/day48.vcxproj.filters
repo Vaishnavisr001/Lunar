@@ -18,6 +18,9 @@
     <ClCompile Include="assgmnt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="assgmnt1\.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="cdr.txt" />
