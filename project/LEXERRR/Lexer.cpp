@@ -1,4 +1,4 @@
-﻿#include "Lexer.h"
+#include "Lexer.h"
 
 #include<cctype>//for character checks
 #include<vector>//for storing keywords as simple list
@@ -27,34 +27,30 @@ std::vector<Token> Lexer::tokenize(const std::string& line) {
 	inputLine = line;
 	currentIndex = 0;
 	std::vector<Token>tokens;
-	
-	if (std::isspace(getCurrentChar())) {
-		skipSpaces(); 
-		
-	}
 
-		//Line number validation
-		if (std::isdigit(getCurrentChar())) {
-			unsigned int lineStart = currentIndex;
-			Token num = extractNumber();
-			if (getCurrentChar() == ' ') {
-				tokens.push_back(num);//treated as line number
-				skipSpaces();
-			}
-			else {
-				currentIndex = lineStart;//rollback
-			}
+	skipSpaces();
+	//Line number validation
+	if (std::isdigit(getCurrentChar())) {
+		unsigned int lineStart = currentIndex;
+		Token num = extractNumber();
+		if (getCurrentChar() == ' ') {
+			tokens.push_back(num);//treated as line number
+			skipSpaces();
 		}
-		while (currentIndex < inputLine.size()) {
-			skipSpaces();//skip any spaces
-			char c = getCurrentChar();
-			if (c == '\0')
-				break;//end of line
-			if (std::isdigit(c))
-			{
-				tokens.push_back(extractNumber());
-			}
-			
+		else {
+			currentIndex = lineStart;//rollback
+		}
+	}
+	while (currentIndex < inputLine.size()) {
+		skipSpaces();//skip any spaces
+		char c = getCurrentChar();
+		if (c == '\0')
+			break;//end of line
+		if (std::isdigit(c))
+		{
+			tokens.push_back(extractNumber());
+		}
+
 		else if (std::isalpha(c)) {
 			tokens.push_back(extractWordOrKeyword());//handles identifiers/keyword
 		}
@@ -65,9 +61,9 @@ std::vector<Token> Lexer::tokenize(const std::string& line) {
 			tokens.push_back(extractOperatororSymbol());
 		}
 		else {
-				//Invalid character
-				std::string invalid(1, c);
-				tokens.emplace_back(TokenType::Invalid, invalid, currentIndex);
+			//Invalid character
+			std::string invalid(1, c);
+			tokens.emplace_back(TokenType::Invalid, invalid, currentIndex);
 			moveToNextChar();//skip any unknown character
 		}
 	}
@@ -76,8 +72,8 @@ std::vector<Token> Lexer::tokenize(const std::string& line) {
 	return tokens;
 }
 
-	
-	
+
+
 //skip white spaces (space,tab,etc)
 void Lexer::skipSpaces() {
 	while (std::isspace(getCurrentChar())) {
@@ -91,55 +87,28 @@ char Lexer::getCurrentChar()const {
 //Moves to the next character and returns it
 char Lexer::moveToNextChar() {
 	return(currentIndex < inputLine.size()) ? inputLine[currentIndex++] : '\0';
-	
-}
-bool Lexer::isAtEnd() const {
-	return currentIndex >= inputLine.length();
-}
 
+}
 //extract a anumber token(like 10,20)
-
 Token Lexer::extractNumber() {
 	unsigned int start = currentIndex;
 	std::string num;
-	bool hasPoint = false;
-	bool hasExponent = false;
-
-	while (!isAtEnd()) {
-		if (std::isspace(getCurrentChar())) {
-			skipSpaces();
-			continue; // ✅ Now it's inside the loop, so no error
-		}
-
-		// Proceed to extract token (number, keyword, operator, etc.)
-	
-
-
-		if (std::isdigit(getCurrentChar())) {
-			num += moveToNextChar();
-		}
-		else if (getCurrentChar() == '.') {
-			if (hasPoint) break;
+	bool hasPoint = false;//to check float
+	while (std::isdigit(getCurrentChar()) ||
+		getCurrentChar() == '.' ||
+		getCurrentChar() == 'E' ||
+		getCurrentChar() == '+' ||
+		getCurrentChar() == '-') {
+		char ch = getCurrentChar();
+		if (ch == '.') {
+			if (hasPoint)
+				break;//only one dot allowed
 			hasPoint = true;
-			num += moveToNextChar();
 		}
-		else if (getCurrentChar() == 'E' || getCurrentChar() == 'e') {
-			if (hasExponent) break;
-			hasExponent = true;
-			num += moveToNextChar();
-			// handle optional + or -
-			if (getCurrentChar() == '+' || getCurrentChar() == '-') {
-				num += moveToNextChar();
-			}
-		}
-		else {
-			break;
-		}
+		num += moveToNextChar();
 	}
-
 	return Token(TokenType::Number, num, start);
 }
-
 //Extracts either a keyword(like print) or identifier(like A$)
 Token Lexer::extractWordOrKeyword() {
 	unsigned int start = currentIndex;
@@ -186,30 +155,30 @@ Token Lexer::extractQuotedText()
 	return Token(TokenType::String, text, start);
 }
 
-	//extract symbols ,operators or seperators like :,=,+,-,>=
-	Token Lexer::extractOperatororSymbol() {
-		unsigned int start = currentIndex;
-		char c = moveToNextChar();
-		char next = getCurrentChar();
-		//Two character operator check like >=,<=,<>
-		if((c=='<' && next=='>') || (c=='<' && next=='=')||(c=='>' && next=='=')) {
-			std::string op;
-			op += c;
-			op += moveToNextChar();//consume second char
-			return Token(TokenType::Operator, op, start);
-		}
-		std::string single(1, c);
-		if (single == "," || single == ":" || single==";") {
-			return Token(TokenType::Seperator, single, start);
-		}
-		else if (std::string("+-=*/^<>()").find(c) != std::string::npos) {
-			return Token(TokenType::Operator, single, start);
-		}
-		else {
-			return Token(TokenType::Symbol, single, start);
-		}
+//extract symbols ,operators or seperators like :,=,+,-,>=
+Token Lexer::extractOperatororSymbol() {
+	unsigned int start = currentIndex;
+	char c = moveToNextChar();
+	char next = getCurrentChar();
+	//Two character operator check like >=,<=,<>
+	if ((c == '<' && next == '>') || (c == '<' && next == '=') || (c == '>' && next == '=')) {
+		std::string op;
+		op += c;
+		op += moveToNextChar();//consume second char
+		return Token(TokenType::Operator, op, start);
 	}
-	//special case:Extracts entire comment after REM
+	std::string single(1, c);
+	if (single == "," || single == ":" || single == ";") {
+		return Token(TokenType::Seperator, single, start);
+	}
+	else if (std::string("+-=*/^<>()").find(c) != std::string::npos) {
+		return Token(TokenType::Operator, single, start);
+	}
+	else {
+		return Token(TokenType::Symbol, single, start);
+	}
+}
+//special case:Extracts entire comment after REM
 Token Lexer::extractCommentAfterRem() {
 	unsigned int start = currentIndex - 3;//REM already read
 	std::string comment = "REM";

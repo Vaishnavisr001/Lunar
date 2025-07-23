@@ -10,7 +10,7 @@ class Lexer {
 public:
 
 	//Lexer(string);
-	 Lexer();
+	Lexer();
 	//This function does the main task of scanning and returning tokens
 	std::vector<Token> tokenize(const std::string& inputLine);
 private:
@@ -20,7 +20,6 @@ private:
 	void skipSpaces();
 	char getCurrentChar() const;
 	char moveToNextChar();
-	bool isAtEnd() const;
 	//These function read specific parts of line and return tokens
 	Token extractNumber();
 	Token extractWordOrKeyword();
@@ -29,8 +28,8 @@ private:
 	Token extractOperatororSymbol();
 
 
-	
-	static bool isKeyword(const std::string & word);
+
+	static bool isKeyword(const std::string& word);
 	static std::string toUpper(const std::string& s);
 
 
