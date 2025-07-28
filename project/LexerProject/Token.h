@@ -10,7 +10,7 @@ enum class TokenType { //different types of token in GWBASICS
 	Comment,
 	END_OF_LINE,
 	Operator,//to classify math or logical operator
-	Seperator ,//for seperating comma,colon etc.
+	Separator ,//for seperating comma,colon etc.
 	Invalid
 };
 struct Token {
@@ -18,6 +18,7 @@ struct Token {
 	std::string value;//the exact word or number from code
 	size_t position;//Index where the token starts in the line
 	//std::string toString() const;
+	
 	Token(TokenType t, const std::string& v, size_t p) {
 		type = t;
 		value = v;

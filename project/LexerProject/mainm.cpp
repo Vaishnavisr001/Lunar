@@ -21,7 +21,7 @@ int main() {
             case TokenType::Comment:    std::cout << "Comment"; break;
             case TokenType::END_OF_LINE:std::cout << "EndOfLine"; break;
             case TokenType::Operator:   std::cout << "Operator"; break;
-            case TokenType::Seperator:  std::cout << "Seperator"; break;
+            case TokenType::Separator:  std::cout << "Seperator"; break;
             case TokenType::Invalid:    std::cout << "Invalid"; break;
             }
             std::cout << ", Value: \"" << token.value << "\", Position: " << token.position << "\n";
