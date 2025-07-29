@@ -1,0 +1,107 @@
+Module Purpose
+The Lexer module is responsible for performing Lexical Analysis on a single line of GW-BASIC source code. It reads the input line character by character and breaks it down into a sequence of tokens, which are the smallest meaningful units in the language (like PRINT, 10, "HELLO", +, etc.).
+These tokens will be used by the parser in the next phase to understand the meaning (syntax) of the code.Core Responsibilities
+Core Responsibilities
+
+Recognize and extract:
+
+Line Numbers
+Keywords (e.g., PRINT, GOTO)
+Identifiers (e.g., variable names like A$, count1)
+Numbers (e.g., 100, 3.14, 1E5)
+Strings (e.g., "Hello")
+Operators & Symbols (e.g., +, -, <=, <>)
+Separators (e.g., ,, :)
+Comments (e.g., REM This is a comment)
+Handle white spaces and skip them
+Provide an END_OF_LINE token to mark the logical end
+
+
+ Working Mechanism (Step-by-Step)
+ 1. tokenize(const std::string& line)
+Initializes line and index.
+Skips leading whitespace.
+Extracts line number if present (uses extractNumber()).
+Then loops through the remaining characters to identify and extract:
+
+Numbers → extractNumber()
+
+Keywords / Identifiers → extractWordOrKeyword()
+
+Strings → extractQuotedText()
+
+Symbols / Operators → extractOperatorOrSymbol()
+
+Appends END_OF_LINE token at the end.
+
+ Supporting Functions and Their Roles
+1) skipSpaces()
+Skips whitespace characters (' ', '\t', etc.)
+
+2) getCurrentChar(), moveToNextChar()
+Utility functions to read and advance the current character.
+
+3) extractNumber()
+Recognizes integers, decimals, and scientific notation (like 1E3). Handles:
+
+Optional . for decimal
+
+Optional E/e for exponential
+
++/- signs in exponent
+
+4) extractWordOrKeyword()
+Reads alphanumeric words and $ (e.g., A$, B2)
+
+Converts word to uppercase to match with keyword list
+
+Detects and handles REM comments using extractCommentAfterRem()
+
+5) extractQuotedText()
+Handles string literals enclosed in " (e.g., "HELLO"). Also supports escaped characters like \".
+
+6) extractOperatorOrSymbol()
+Identifies:
+
+Operators (+, -, *, =, >=, <=, <>)
+
+Separators (,, :)
+
+Symbols (unrecognized punctuation)
+
+7) extractCommentAfterRem()
+Captures the entire line after REM as a single comment token.
+
+8)isKeyword(std::string)
+Checks if a word is a reserved GW-BASIC keyword using the keyword list.
+
+9) toUpper(std::string)
+Converts input to uppercase for case-insensitive comparison.
+
+> Example Input and Output
+Input Line:
+
+basic
+Copy code
+10 PRINT "HELLO"
+Output Tokens:
+[LineNumber: 10]
+[Keyword: PRINT]
+[String: "HELLO"]
+[END_OF_LINE]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
